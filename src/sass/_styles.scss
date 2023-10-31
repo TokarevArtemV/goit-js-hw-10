@@ -1,0 +1,34 @@
+body {
+  height: 100vh;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.breed-select {
+  margin-bottom: 30px;
+  display: none;
+}
+
+.cat-info {
+}
+
+.title-descrip {
+  max-width: 340px;
+  margin-left: auto;
+}
+
+.text-descrip {
+  max-width: 340px;
+  margin-left: auto;
+}
+
+.fit-picture {
+  width: 400px;
+  float: left;
+  margin-right: 20px;
+}
+.error {
+  display: none;
+}
