@@ -3,11 +3,11 @@ import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import { selectMarkup, catInfoMarkup } from './js/createMarkup';
 import { Notify } from 'notiflix';
 import { loadStateOff, loadStateOn } from './js/loadState';
-// import SlimSelect from 'slim-select';
+import SlimSelect from 'slim-select';
 
-// new SlimSelect({
-//   select: '#breedselect',
-// });
+new SlimSelect({
+  select: '#breedselect',
+});
 
 refs.listEl.addEventListener('input', evt => {
   refs.imgContainerEl.style.display = 'none';
