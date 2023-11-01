@@ -8,7 +8,6 @@ body {
 
 .breed-select {
   margin-bottom: 30px;
-  display: none;
 }
 
 .cat-info {
@@ -30,5 +29,8 @@ body {
   margin-right: 20px;
 }
 .error {
+  display: none;
+}
+.hidden{
   display: none;
 }

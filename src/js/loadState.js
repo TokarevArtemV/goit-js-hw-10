@@ -1,13 +1,11 @@
 import { refs } from './refs';
 
-export function loadStateOn() {
-  refs.loadEl.style.display = 'block';
-  refs.listEl.style.display = 'none';
-  refs.imgContainerEl.style.display = 'none';
+export function loadOn() {
+  refs.loadEl.classList.remove("hidden");
+  refs.imgContainerEl.classList.add("hidden");
 }
 
-export function loadStateOff() {
-  refs.loadEl.style.display = 'none';
-  refs.listEl.style.display = 'block';
-  refs.imgContainerEl.style.display = 'block';
+export function loadOff() {
+  refs.loadEl.classList.add("hidden");
+  refs.imgContainerEl.classList.remove("hidden");
 }
