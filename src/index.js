@@ -7,16 +7,21 @@ import SlimSelect from 'slim-select';
 import '/node_modules/slim-select/dist/slimselect.css';
 
 refs.listEl.addEventListener('change', evt => {
-  refs.imgContainerEl.classList.add("hidden");
+  refs.imgContainerEl.classList.add('hidden');
   fetchCatByBreed(evt.currentTarget.value)
     .then(data => {
       refs.imgContainerEl.innerHTML = '';
       const catMarkup = catInfoMarkup(data);
-      refs.imgContainerEl.insertAdjacentHTML('afterbegin', catMarkup);
-      loadOff();
+      refs.imgContainerEl.insertAdjacentHTML('beforeend', catMarkup);
+      document.querySelector('.fit-picture').onload = () => {
+        loadOff();
+      };
     })
     .catch(error => {
-      Notify.failure(error.message, options.notiflix);
+      Notify.failure(
+        error.message + ' Please try to reload page later',
+        options.notiflix
+      );
       loadOn();
     });
 });
@@ -37,7 +42,7 @@ fetchBreeds()
     //     Notify.failure(error.message, refs.optionNotiflix);
     //     loadOn();
     //   });
-    
+
     refs.listEl.insertAdjacentHTML('beforeend', markup);
     new SlimSelect({
       select: '#breedselect',
