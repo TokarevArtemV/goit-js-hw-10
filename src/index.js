@@ -35,7 +35,7 @@ fetchBreeds()
       select: '#breedselect',
       settings: {
         searchPlaceholder: 'Пошук',
-        placeholderText: 'Вибери котика',
+        placeholderText: 'Вибери породу котика',
       },
     });
     loadOff();
