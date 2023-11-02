@@ -6,12 +6,12 @@ export function selectMarkup(arrBreeds) {
     .join('');
 }
 
-export function catInfoMarkup(data) {
+export function catInfoMarkup([{ breeds:[{name,description}], url }]) {
   return `<img
         class="fit-picture"
-        src="${data.data[0].url}"
-        alt="${data.data[0].breeds[0].name}"
+        src="${url}"
+        alt="${name}"
       />
-      <h2 class="title-descrip">${data.data[0].breeds[0].name}</h2>
-      <p class="text-descrip">${data.data[0].breeds[0].description}</p>`;
+      <h2 class="title-descrip">${name}</h2>
+      <p class="text-descrip">${description}</p>`;
 }

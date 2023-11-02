@@ -1,8 +1,8 @@
-import { refs, options } from './js/refs';
+import { refs } from './js/refs';
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import { selectMarkup, catInfoMarkup } from './js/createMarkup';
-import { Notify } from 'notiflix';
 import { loadOff, loadOn } from './js/loadState';
+import { errorFn } from './js/errors';
 import SlimSelect from 'slim-select';
 import '/node_modules/slim-select/dist/slimselect.css';
 
@@ -11,17 +11,14 @@ refs.listEl.addEventListener('change', evt => {
   fetchCatByBreed(evt.currentTarget.value)
     .then(data => {
       refs.imgContainerEl.innerHTML = '';
-      const catMarkup = catInfoMarkup(data);
+      const catMarkup = catInfoMarkup(data.data);
       refs.imgContainerEl.insertAdjacentHTML('beforeend', catMarkup);
       document.querySelector('.fit-picture').onload = () => {
         loadOff();
       };
     })
     .catch(error => {
-      Notify.failure(
-        error.message + ' Please try to reload page later',
-        options.notiflix
-      );
+      errorFn(error.message);
       loadOn();
     });
 });
@@ -31,25 +28,19 @@ fetchBreeds()
     loadOff();
     const markup = selectMarkup(data.data);
 
-    // fetchCatByBreed(data.data[0].id)
-    //   .then(data => {
-    //     refs.imgContainerEl.innerHTML = '';
-    //     const catMarkup = catInfoMarkup(data);
-    //     refs.imgContainerEl.insertAdjacentHTML('afterbegin', catMarkup);
-    //     loadOff();
-    //   })
-    //   .catch(error => {
-    //     Notify.failure(error.message, refs.optionNotiflix);
-    //     loadOn();
-    //   });
-
-    refs.listEl.insertAdjacentHTML('beforeend', markup);
+    refs.listEl.insertAdjacentHTML(
+      'beforeend',
+      `<option data-placeholder="true"></option>${markup}`
+    );
     new SlimSelect({
       select: '#breedselect',
-      settings: { searchPlaceholder: 'Пошук' },
+      settings: {
+        searchPlaceholder: 'Пошук',
+        placeholderText: 'Вибери котика',
+      },
     });
   })
   .catch(error => {
-    Notify.failure(error.message, options.notiflix);
+    errorFn(error.message);
     loadOn();
   });
